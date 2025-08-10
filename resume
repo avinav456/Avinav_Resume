@@ -1,0 +1,186 @@
+\documentclass[10pt, letterpaper]{article}
+
+% ================= PREAMBLE =================
+% Packages:
+\usepackage[
+    ignoreheadfoot,
+    top=2 cm,
+    bottom=2 cm,
+    left=2 cm,
+    right=2 cm,
+    footskip=1.0 cm,
+]{geometry}
+\usepackage{titlesec}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{primaryColor}{RGB}{0, 0, 0}
+\usepackage{enumitem}
+\usepackage{fontawesome5}
+\usepackage{amsmath}
+\usepackage[
+    pdftitle={<YOUR NAME> — Resume},
+    pdfauthor={<YOUR NAME>},
+    pdfcreator={LaTeX},
+    colorlinks=true,
+    urlcolor=primaryColor
+]{hyperref}
+\usepackage[pscoord]{eso-pic}
+\usepackage{calc}
+\usepackage{bookmark}
+\usepackage{lastpage}
+\usepackage{changepage}
+\usepackage{paracol}
+\usepackage{ifthen}
+\usepackage{needspace}
+\usepackage{iftex}
+
+% Ensure ATS/machine readability
+\ifPDFTeX
+    \input{glyphtounicode}
+    \pdfgentounicode=1
+    \usepackage[T1]{fontenc}
+    \usepackage[utf8]{inputenc}
+    \usepackage{lmodern}
+\fi
+
+\usepackage{charter}
+
+% Layout settings
+\raggedright
+\AtBeginEnvironment{adjustwidth}{\partopsep0pt}
+\pagestyle{empty}
+\setcounter{secnumdepth}{0}
+\setlength{\parindent}{0pt}
+\setlength{\topskip}{0pt}
+\setlength{\columnsep}{0.15cm}
+\pagenumbering{gobble}
+
+\titleformat{\section}{\needspace{4\baselineskip}\bfseries\large}{}{0pt}{}[\vspace{1pt}\titlerule]
+\titlespacing{\section}{-1pt}{0.3 cm}{0.2 cm}
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\small$\bullet$}}$}
+\newenvironment{highlights}{\begin{itemize}[topsep=0.10 cm,parsep=0.10 cm,partopsep=0pt,itemsep=0pt,leftmargin=0 cm + 10pt]}{\end{itemize}}
+\newenvironment{highlightsforbulletentries}{\begin{itemize}[topsep=0.10 cm,parsep=0.10 cm,partopsep=0pt,itemsep=0pt,leftmargin=10pt]}{\end{itemize}}
+\newenvironment{onecolentry}{\begin{adjustwidth}{0 cm + 0.00001 cm}{0 cm + 0.00001 cm}}{\end{adjustwidth}}
+\newenvironment{twocolentry}[2][]{\onecolentry\def\secondColumn{#2}\setcolumnwidth{\fill, 4.5 cm}\begin{paracol}{2}}{\switchcolumn \raggedleft \secondColumn\end{paracol}\endonecolentry}
+\newenvironment{threecolentry}[3][]{\onecolentry\def\thirdColumn{#3}\setcolumnwidth{, \fill, 4.5 cm}\begin{paracol}{3}{\raggedright #2} \switchcolumn}{\switchcolumn \raggedleft \thirdColumn\end{paracol}\endonecolentry}
+\newenvironment{header}{\setlength{\topsep}{0pt}\par\kern\topsep\centering\linespread{1.5}}{\par\kern\topsep}
+
+% Optional "last updated" (edit or comment out)
+\newcommand{\placelastupdatedtext}{\AddToShipoutPictureFG*{\put(\LenToUnit{\paperwidth-2 cm-0 cm+0.05cm},\LenToUnit{\paperheight-1.0 cm}){\vtop{{\null}\makebox[0pt][c]{\small\color{gray}\textit{Last updated: <MONTH YEAR>}\hspace{\widthof{Last updated: <MONTH YEAR>}}}}}}}
+
+% Keep raw href for compact header links
+\let\hrefWithoutArrow\href
+
+% ================= DOCUMENT =================
+\begin{document}
+\placelastupdatedtext
+
+% --- HEADER ---
+\begin{header}
+    \fontsize{25 pt}{25 pt}\selectfont <YOUR NAME>
+
+    \vspace{5 pt}
+    \normalsize
+    \mbox{<CITY/PROVINCE>}\kern 5 pt\AND\kern 5 pt
+    \mbox{\hrefWithoutArrow{mailto:<EMAIL>}{<EMAIL>}}\kern 5 pt\AND\kern 5 pt
+    \mbox{\hrefWithoutArrow{tel:<TEL INTL>}{<PHONE DISPLAY>}}\kern 5 pt\AND\kern 5 pt
+    \mbox{\hrefWithoutArrow{<PORTFOLIO_URL>}{<PORTFOLIO_DOMAIN>}}\kern 5 pt\AND\kern 5 pt
+    \mbox{\hrefWithoutArrow{<LINKEDIN_URL>}{<LINKEDIN_DISPLAY>}}\kern 5 pt\AND\kern 5 pt
+    \mbox{\hrefWithoutArrow{<GITHUB_URL>}{<GITHUB_DISPLAY>}}
+\end{header}
+
+\vspace{5 pt - 0.3 cm}
+
+% === PROFESSIONAL SUMMARY (optional, 2–3 lines) ===
+\section{Summary}
+\begin{onecolentry}
+    <1–3 line targeted summary (e.g., IT student focusing on help desk / cybersecurity; highlight top skills + achievements)>
+\end{onecolentry}
+
+% === SKILLS ===
+\section{Technical Skills}
+\begin{onecolentry}
+    \textbf{Languages:} <Python, C/C++, JavaScript, SQL, ...>
+\end{onecolentry}
+\vspace{0.15 cm}
+\begin{onecolentry}
+    \textbf{Frameworks/Tools:} <Node.js, Express, React, Next.js, MongoDB, Git, AWS, Linux, ...>
+\end{onecolentry}
+\vspace{0.15 cm}
+\begin{onecolentry}
+    \textbf{Other:} <Power BI/Excel, Data analysis, Jira, ...>
+\end{onecolentry}
+
+% === EDUCATION ===
+\section{Education}
+\begin{twocolentry}{<Start Mon YYYY -- End Mon YYYY or Present>}
+    \textbf{<Institution>}, <Program/Degree> -- <City, Province>
+\end{twocolentry}
+\vspace{0.10 cm}
+\begin{onecolentry}
+    \begin{highlights}
+        \item GPA: <GPA> \hfill \textit{Honors/Awards: <e.g., President's Honor List, 4.0 GPA>}
+        \item \textbf{Relevant Coursework:} <Course 1>, <Course 2>, <Course 3>, <Course 4>, <Course 5>
+        % \item Scholarships: <Name> (<Month YYYY>)
+    \end{highlights}
+\end{onecolentry}
+
+% === EXPERIENCE ===
+\section{Experience}
+% Example role
+\begin{twocolentry}{<Start Mon YYYY -- End Mon YYYY>}
+    \textbf{<Job Title>}, <Company/Organization> -- <City, Province>
+\end{twocolentry}
+\vspace{0.10 cm}
+\begin{onecolentry}
+    \begin{highlights}
+        \item <Impact-focused bullet with metric/result>
+        \item <Action + tool/tech + outcome>
+        \item <Customer/operations/security impact>
+    \end{highlights}
+\end{onecolentry}
+
+% === PROJECTS ===
+\section{Projects}
+\begin{twocolentry}{\href{<REPO_OR_LIVE_LINK>}{<display-link>}}
+    \textbf{<Project Name>}
+\end{twocolentry}
+\vspace{0.10 cm}
+\begin{onecolentry}
+    \begin{highlights}
+        \item Built <what> using <stack>; achieved <metric/result>.
+        \item Notables: <feature A>, <feature B> \textbar{} Role: <solo/team size N>
+    \end{highlights}
+\end{onecolentry}
+
+% (Repeat project blocks as needed)
+
+% === CERTIFICATIONS ===
+\section{Certifications}
+\begin{onecolentry}
+    <AWS CCP (Mon YYYY); First Aid & CPR (Mon YYYY); Security Guard License (Mon YYYY); Smart Serve (Mon YYYY); ...>
+\end{onecolentry}
+
+% === LEADERSHIP & AWARDS ===
+\section{Leadership & Awards}
+\begin{onecolentry}
+    \textbf{<Role>}, <Club/Org> (Mon YYYY -- Mon YYYY) — <impact/achievement>\\
+    \textbf{Awards:} <e.g., President's Honor List (Term/Year); State-level Chess Champion; Badminton Gold>
+\end{onecolentry}
+
+% === VOLUNTEERING (optional) ===
+\section{Volunteering}
+\begin{twocolentry}{<Mon YYYY -- Mon YYYY>}
+    \textbf{<Role>}, <Organization> -- <City, Province>
+\end{twocolentry}
+\vspace{0.10 cm}
+\begin{onecolentry}
+    \begin{highlights}
+        \item <Impact bullet>
+        \item <Skills/tools used>
+    \end{highlights}
+\end{onecolentry}
+
+\end{document}
